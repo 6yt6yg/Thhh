@@ -45,8 +45,31 @@ var table = require("table").table;
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
 })
+    //الكونفج
 
-const devs3 = ['743448933573066832']
+const devs = process.env.OWNER_ID;
+
+const stat = process.env.BOT_STATUS;
+
+const prefix = process.env.PREFIX;
+
+const project_name = "niro-system"; 
+
+const color = process.env.EMBED_COLOR; 
+
+const youtube = new YouTube("AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA")
+
+client.login(process.env.TOKEN); 
+
+//سيب حقوقي ارجوك
+
+//قدر تعبي//
+
+const yt_api_key = "AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA";
+
+const Rules = process.env.SERVER_RULES;
+/////بلاك سلت
+const devs3 = [`${devs}`]
 client.on('message', async message => {
 if (message.author.bot) return undefined;
 let user = message.mentions.users.first();
@@ -70,14 +93,14 @@ let embed = new Discord.RichEmbed()
 .setFooter(message.guild.name, message.guild.iconURL);
 let channel = message.guild.channels;
 client.channels
-.get("ايدي روم البلاك ليست").sendEmbed(embed)
+.get(`{black_room}`).sendEmbed(embed)
 .find("name", "blacklist-users");
 channel.send(embed);
  }
 });
 
 const db = require('quick.db');
-const devs2 = ['743448933573066832']
+const devs2 = [`${devs}`]
 client.on('message', async message => {
 if (message.author.bot) return undefined;
 let user = message.mentions.users.first();
@@ -89,7 +112,7 @@ return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور 
 let user = message.mentions.users.first() || message.guild.members.cache.get(args[0]); 
 let Blacklist = await db.fetch(`Blacklist_${user.id}`); 
 if (Blacklist === null) Blacklist = 'off'; 
-/* if (!user) return message.channel.send(`**Usage: ${prefix}blacklist \`<Mention/ID>\`**`); */
+if (!user) return message.channel.send(`**Usage: ${prefix}blacklist \`<Mention/ID>\`**`); 
 message.channel.send(`**Done Blacklisted The User**`); 
 db.set(`Blacklist_${user.id}`, "on");
 user.send(`⚠️${user}⚠️
@@ -126,10 +149,9 @@ if (Blacklist === 'on') return message.channel.send(`**❌ | __Your Are Blacklis
 message.channel.send(`** __You Aren't Blacklisted__ **`); 
   } 
 });
-
+//تغير برفكس
 const fs = require("fs"); // fs Package //
 let prefixes = JSON.parse(fs.readFileSync("./prefix.json", "utf8"));
- 
 client.on("message", message => {
     if (!message.channel.guild) return;
     if (message.author.bot) return;
@@ -183,19 +205,8 @@ client.on('message', message => {
                     fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
         if (err) console.error(err);
     });
-const devo = process.env.OWNER_ID;
-const stat = process.env.BOT_STATUS;
-const prefix = process.env.PREFIX;
-const project_name = "niro-system"; 
-const color = process.env.EMBED_COLOR; 
-const youtube = new YouTube("AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA")
-client.login(process.env.TOKEN); 
-//سيب حقوقي ارجوك
-//قدر تعبي//
-const yt_api_key = "AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA";
-const Rules = process.env.SERVER_RULES;
 
-
+//حالة البوت لا تلعب فيها تقدر تعدل من env.
 client.on("ready", () => {
   console.log(`${client.user.tag}`);
 
@@ -209,14 +220,11 @@ client.on("ready", () => {
 
   client.user.setActivity(`${stat}`, { type: "streaming" });
 });
-
+//قوانين سيرفرك تقدر تعدلها من env.
 client.on("message", async luxy => {
    if (!prefixes[luxy.guild.id]) prefixes[luxy.guild.id] = {
-
         prefix: process.env.PREFIX,
-
     };
-
     var prefix = prefixes[luxy.guild.id].prefix;
   if (luxy.author.bot) return;
   if (luxy.content === prefix + "rules") {
@@ -228,9 +236,7 @@ client.on("message", async luxy => {
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ${Rules}
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-**
-`
-      )
+**`)
       .setFooter("NIRO Development");
     luxy.channel.send({ embed: embed });
   }
@@ -238,92 +244,86 @@ ${Rules}
 fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
         if (err) console.error(err);
     });
-
+/////كود الهيلب او المساعده
 client.on("message", async message => {
    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
         prefix: process.env.PREFIX,
-
     };
-
     var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 if(Blacklist === 'on') return message.channel.send(``);
   if (message.content.startsWith(prefix + "help")) {
-    //DiamondCodes - [ X_KillerYT ]
     let pages = [
+      `🎉**Giveaway Orders**🎉
+> **🎉| ${prefix}gstart --> To Make a Giveaway - لعمل جيف اواي **
+> **🎉| ${prefix}groll --> To Change The Giveaway Winner - لتغير الفائز بالجيف اواي **
+> **🎉| ${prefix}gend --> To End The Giveaway - لأنهاء الجيف اواي **
+`,
       `👑**Admin Orders**👑
-> **👑| ${prefix}start --> To make a giveaway**
-> **👑| ${prefix}cr --> To make a color roles**
-> **👑| ${prefix}setinv --> To set invites room**
-> **👑| ${prefix}setmember --> To make a voice channel count members in the server**
-> **👑| ${prefix}vonline --> To maje a voice channel count online voice channels in the server**
-> **👑| ${prefix}close --> To close any text channel in the server**
-> **👑| ${prefix}open --> To open any text channel in the server**     
-> **👑| ${prefix}hc --> to hide any text channel in your server**    
-> **👑| ${prefix}sc --> To shiw any text channel in your server**     
-> **👑| ${prefix}clear --> To clear any text channel in the server**      
-> **👑| ${prefix}say --> To make the bot say any thing you type aftr &say hi** 
-> **👑| ${prefix}ban --> To ban any user in the server**
-> **👑| ${prefix}kick --> To kick any user in the server**     
-> **👑| ${prefix}mute --> To give any user in the server text mute**    
-> **👑| ${prefix}unmute --> To unmute any user gived mute in the server**
-> **👑| ${prefix}role --> to give any user role**
-> **👑| ${prefix}reply --> to make a auro response**
-> **👑| ${prefix}ctext --> To create a text channel**
-> **👑| ${prefix}cvoive --> To create a voice channel**
-> **👑| ${prefix}rename --> To rename any text channel**
-> **👑| ${prefix}autorole --> To give any new member role**
-> **👑| ${prefix}setWelcomer --> To set welcome chat**
-> **👑| ${prefix}setMessage --> To set welcome masseg**`,
+> **👑| ${prefix}cr --> لصنع الوان للسيرفر**
+> **👑| ${prefix}setmember --> لعمل روم صوتي بعدد الاعضاء في السيرفر  **
+> **👑| ${prefix}vonline --> لعمل روم بعدد المتصلين في السيرفر **
+> **👑| ${prefix}close --> لقفل الشات **
+> **👑| ${prefix}open --> لفتح الشات **     
+> **👑| ${prefix}hc --> لأخفاء الشات**    
+> **👑| ${prefix}sc --> لأظهار الشات**     
+> **👑| ${prefix}clear --> لمسح الشات**      
+> **👑| ${prefix}say --> البوت يردد ما تقول **
+> **👑| ${prefix}ban --> لحظر اي عضو في السيرفر**
+> **👑| ${prefix}kick --> لطرد اي عضو في السيرفر**     
+> **👑| ${prefix}mute --> لأعطاء اي شخص ميوت كتابي**    
+> **👑| ${prefix}unmute --> لفك الميوت من اي شخص**
+> **👑| ${prefix}role --> لأعضاء اي شخص رتبه معينه**
+> **👑| ${prefix}reply --> لصنع رد تلقائي**
+> **👑| ${prefix}ctext --> لصنع روم كتابي**
+> **👑| ${prefix}cvoive --> لصنع روم صوتي**
+> **👑| ${prefix}rename --> لتغير اسم الروم الكتابي**
+> **👑| ${prefix}autorole --> لعمل رتبه تلقاءيه**
+> **👑| ${prefix}temp on/off --> لعمل روم صوتي مؤقت**
+`,
       `👥**Public Orders**👥
-> **👥| ${prefix}new --> open ticket**
-> **👥| ${prefix}old --> close ticket**
-> **👥| ${prefix}rules --> review Server Rules**
-> **👥| ${prefix}ping --> To see Your ping**
-> **👥| ${prefix}tempv --> To make a Temporary voice channel**
-> **👥| ${prefix}emoji --> To See all server emoji**
-> **👥| ${prefix}short --> To make a shortcut to any link**
-> **👥| ${prefix}info --> To know count of invites you have**
-> **👥| ${prefix}avatar --> To see your avatar or you menchen avatar \`&avatar @abdo\`**
-> **👥| ${prefix}top --> To see top 5 of best 5 level in text abd voice**
-> **👥| ${prefix}top text --> To see top 10 of best 10 level in text**
-> **👥| ${prefix}top voice --> To see top 10 of best 10 level in voice**
-> **👥| ${prefix}credits --> To see how many you have of credits**
-> **👥| ${prefix}daily --> To give a gift every day**
-> **👥| ${prefix}email  --> Give's you random email**
-> **👥| ${prefix}emojilist --> show you emoji list**
-> **👥| ${prefix}server --> To see server info**
-> **👥| ${prefix}status --> See If You Black listed
+> **👥| ${prefix}new --> لفتح تكت**
+> **👥| ${prefix}old --> لغلق التكت**
+> **👥| ${prefix}rules --> لعرض قوانين السيرفر**
+> **👥| ${prefix}ping --> تشوف بنج البوت**
+> **👥| ${prefix}emoji --> تشوف كل الايموجي الي في السيرفر**
+> **👥| ${prefix}short --> لعمل رابط مختصر للروابط**
+> **👥| ${prefix}avatar --> تشوف صورة اي عضو**
+> **👥| ${prefix}top --> تشوف تفاعل الناس**
+> **👥| ${prefix}top text --> تشوف تفاعل الناس كتابي**
+> **👥| ${prefix}top voice --> تشوف تفاعل الناس صوتي**
+> **👥| ${prefix}credits --> تشوف رصيدك **
+> **👥| ${prefix}daily --> للحصول على جائزه يوميه**
+> **👥| ${prefix}email  --> لعمل ايميل وهمي**
+> **👥| ${prefix}emojilist --> تسوف ايموجي السيرفر**
+> **👥| ${prefix}server --> تشوف معلومات السبرفر**
+> **👥| ${prefix}status --> تشوف لو انت بالع بلاك لست ولا لا*"
 `,
       `**🎮Games Orders**🎮
-> **🎮| ${prefix}xo --> To play XO With friends**
-> **🎮| ${prefix}puzzle --> To play Puzzle With frends**
-> **🎮| ${prefix}fast --> To play fast With frends**
-> **🎮| ${prefix}rkb --> To play rkb With frends**
-> **🎮| ${prefix}math --> To play math quiz with your frend**
-> **🎮| ${prefix}hack --> To hack your friend just for fun**
-> **🎮| ${prefix}kill --> To kill your frend just for fun**
-> **🎮| ${prefix}fkk --> To play fkk with your friends**
-> **🎮| ${prefix}capitals --> To play fkk with your friends**
-> **🎮| ${prefix}rps --> To play rock paper scissors**
-> **🎮| ${prefix}hq --> hard qwiz**`,
+> **🎮| ${prefix}xo --> لعبة اكس اوه**
+> **🎮| ${prefix}math --> لعبة رياضيات**
+> **🎮| ${prefix}hack --> لعبة التهكير**
+> **🎮| ${prefix}kill --> لعبة قتل**
+> **🎮| ${prefix}fkk --> لعبة تفكيك الكلمات**
+> **🎮| ${prefix}capitals --> لعبة عواصم**
+> **🎮| ${prefix}rps --> لعبة حجره زرقه مقص**
+> **🎮| ${prefix}hq --> لعبة اسأله صعبه**`,
       `**🎶Music Orders🎶**
-> **🎶| ${prefix}play --> To play a music**
-> **🎶| ${prefix}stop --> To stop a music**
-> **🎶| ${prefix}pause --> To stop music Temporary**
-> **🎶| ${prefix}resume --> To play music Temporary**
-> **🎶| ${prefix}skip --> To skip the music**
-> **🎶| ${prefix}volume --> To control music volume**
-> **🎶| ${prefix}repeat --> To repeat the music**
-> **🎶| ${prefix}queue --> To see what in the music list**
-> **🎶| ${prefix}np --> To see what is playing now**
-> **🎶| ${prefix}forceskip --> To skip music automatically**
-> **🎶| ${prefix}skipto --> To skip the music namber 2 in the list**`,
+> **🎶| ${prefix}play --> لتشغيل الموسيقى**
+> **🎶| ${prefix}stop --> لأيقاف الموسيقى**
+> **🎶| ${prefix}pause --> لأيقاف الموسقى مؤقتا**
+> **🎶| ${prefix}resume --> لأستكمال الموسيقى**
+> **🎶| ${prefix}skip --> لتخطي الموسيقى**
+> **🎶| ${prefix}volume --> للتحكم في الصوت**
+> **🎶| ${prefix}repeat --> لتكرار الموسيقى**
+> **🎶| ${prefix}queue --> لعرض قاءمة التشغيل**
+> **🎶| ${prefix}np --> لعرض ما يتم تشغيله**
+> **🎶| ${prefix}skipto --> تتخطى اغنيتين **
+`,
       `**🛠️Bot Config🛠️**
-> **⚒️| ${prefix}blacklist --> Make any one can't use your bot**
-> **⚒️| ${prefix}unblacklist --> unlock the black list**
-> **⚒️| ${prefix}prefix --> Change Bot Prefix**`,
+> **⚒️| ${prefix}blacklist --> تبلع اي شخص بلاك لست فا ما يقدر يستعمل البوت**
+> **⚒️| ${prefix}unblacklist --> تفك البلاك لست**
+> **⚒️| ${prefix}prefix --> تغير البرفكس**`,
       `${developer}`
     ];
     let page = 1;
@@ -369,14 +369,9 @@ if(Blacklist === 'on') return message.channel.send(``);
   }
 });
 fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
         if (err) console.error(err);
-
     });
-
-////
-
-
+////كود الميوزك
 let cmds = {
   play: { cmd: "play", a: ["p", "شغل"] },
   skip: { cmd: "skip", a: ["s", "تخطى"] },
@@ -420,11 +415,8 @@ client.on("ready", () => {
 
 client.on("message", async msg => {
    if (!prefixes[msg.uild.id]) prefixes[msg.uild.id] = {
-
         prefix: process.env.PREFIX,
-
     };
-
     var prefix = prefixes[msg.guild.id].prefix;
   if (msg.author.bot) return undefined;
   if (!msg.content.startsWith(prefix)) return undefined;
@@ -561,7 +553,7 @@ client.on("message", async msg => {
             .send(":watch: Loading... [`" + args + "`]")
             .then(m => {
               setTimeout(() => {
-                //:watch: Loading... [let]
+ //               :watch: Loading... [let]
                 m.edit(
                   `:notes: Added **${song.title}**` +
                     "(` " +
@@ -599,8 +591,8 @@ client.on("message", async msg => {
       const dispatcher = serverQueue.connection
         .playStream(ytdl(song.url))
         .on("end", reason => {
-          //if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-          //else console.log(reason);
+          if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+          else console.log(reason);
           if (serverQueue.repeating) return play(guild, serverQueue.songs[0]);
           serverQueue.songs.shift();
           play(guild, serverQueue.songs[0]);
@@ -613,10 +605,10 @@ client.on("message", async msg => {
       return msg.channel.send(
         `You must be in ${msg.guild.me.voiceChannel.name}`
       );
-    // if (!msg.member.hasPermission("ADMINISTRATOR")) {
-    //    msg.react("❌");
-    //    return msg.channel.send("You don't have permission `ADMINSTRATOR`");
-    //  }
+     if (!msg.member.hasPermission("ADMINISTRATOR")) {
+        msg.react("❌");
+        return msg.channel.send("You don't have permission `ADMINSTRATOR`");
+      }
     let queue = active.get(msg.guild.id);
     if (queue.repeating)
       return msg.channel.send(
@@ -973,317 +965,7 @@ const { resolve, join } = require("path");
 const fetch = require("node-fetch");
 const prettySeconds = require("pretty-seconds");
 const fsn = require("fs-nextra");
-
-const welcome = JSON.parse(fs.readFileSync("./Database/welcomer.json", "utf8")); //ملف تخزين كود الويلكم
-
-//كود الويلكم
-
-client.on("guildMemberAdd", async member => {
-   if (!prefixes[member.uild.id]) prefixes[member.uild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[member.guild.id].prefix;
-  let Blacklist = await db.fetch(`Blacklist_${member.author.id}`);
-
-if(Blacklist === 'on') return member.channel.send(``);
-  if (!welcome) return;
-  if (!welcome[member.guild.id]) return;
-  var findingWlcChannel = welcome[member.guild.id]
-    ? welcome[member.guild.id].channel
-    : "null";
-  const channel = await member.guild.channels.find(
-    r => r.name == findingWlcChannel
-  );
-  if (!channel) return;
-  if (channel) {
-    const imageUrlRegex = /\?size=2048$/g; ///تعديل غير اساسي
-    const wlcImage = await fsn.readFile("./BotData/welcome.png"); //اسم الصورة
-    let result = await fetch(
-      member.user.displayAvatarURL.replace(imageUrlRegex, "?size=128")
-    );
-    if (!result.ok) throw new Error("Failed to get the avatar!");
-    let avatar = await result.buffer();
-
-    let name =
-      member.user.username.length > 12
-        ? member.user.username.substring(0, 11) + "..."
-        : member.user.username;
-
-    // تعديل غير اساسي : هنا خيارات الصورة لو تبى تغيرها
-
-    //Welcome Image (background)
-    var imageWidth = 500; //عرض الصورة
-    var imageHeight = 266; //ارتفاع الصورة
-
-    //Avatar
-    var imageX = 250; //X coordinate
-    var imageY = 145; //Y coordinate
-    var imageRadius = 110; //نصف قطر الصورة الدائرية
-
-    //Member Name
-    var nameSize = "12pt"; //حجم خط الاسم
-    var nameKind = "Source Sans Pro (OT1)"; //نوع خط الاسم
-    var nameColor = "#ff9933"; //لون خط الاسم
-
-    //Name Position
-    var nameX = 247; //position x
-    var nameY = 275; //position y
-
-    let buffer = await new Canvas(500, 300)
-      .addImage(wlcImage, 0, 0, imageWidth, imageHeight)
-      .addCircularImage(avatar, imageX, imageY, imageRadius)
-      .setTextAlign("center")
-      .setTextFont(`${nameSize} ${nameKind}`)
-      .setColor(nameColor)
-      .addText(name, nameX, nameY)
-      .toBuffer();
-    const filename = `Baron-wlc-${member.id}.jpg`;
-    const attachment = new Attachment(buffer, filename);
-    await channel.send(attachment);
-  }
-});
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-//تحديد روم الويلكم
-const wait = require("util").promisify(setTimeout);
-client.on("ready", async (message) => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[message.guild.id].prefix;
-  wait(1000);
-
-  await client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-var gg2;
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-client.on("guildMemberAdd", async member => {
-   if (!prefixes[member.guild.id]) prefixes[member.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[member.guild.id].prefix;
-  if (!welcome[member.guild.id])
-    welcome[member.guild.id] = {
-      by: "Off",
-      channel: null
-    };
-
-  if (welcome[member.guild.id].by === "Off") return;
-  let channel = member.guild.channels.find(
-    c => c.name == welcome[member.guild.id].channel
-  );
-  if (!channel) return;
-
-  await member.guild.fetchInvites().then(async guildInvites => {
-    const ei = await invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = await guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter1 = await invite.inviter;
-    const inviter =
-      (await client.users.get(invite.inviter.id)) ||
-      client.users.get(member.guild.owner.user.id);
-    const logChannel = member.guild.channels.find(
-      channel => channel.name === `${welcome[member.guild.id].channel}`
-    );
-    if (!logChannel) return console.log("I can't find welcomeChannel");
-    let gg1 = await welcome[member.guild.id].msg.replace(
-      "[member]",
-      `<@!${member.id}>`
-    );
-    if (!inviter1 || !inviter1.id) {
-      gg2 = await gg1.replace("[inviter]", `<@${member.guild.ownerID}>`);
-    } else {
-      gg2 = await gg1.replace("[inviter]", `<@${inviter1.id}>`);
-    }
-    setTimeout(() => {
-      logChannel.send(`${gg2}`);
-    }, 2000);
-    fs.writeFile("./Database/welcome.json", JSON.stringify(welcome), err => {
-      if (err)
-        console.error(err).catch(err => {
-          console.error(err);
-        });
-    });
-  });
-});
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[message.guild.id].prefix;
-  if (!message.channel.guild) return;
-  let room = message.content.split(" ").slice(1);
-  let findroom = message.guild.channels.find(r => r.name == room);
-  if (message.content.startsWith(prefix + "setWelcomer")) {
-    if (!welcome[message.guild.id]) {
-      if (!message.channel.guild)
-        return message.reply("**This Command Only For Servers**");
-      if (!message.member.hasPermission("MANAGE_GUILD"))
-        return message.channel.send(
-          "**Sorry But You Dont Have Permission** `MANAGE_GUILD`"
-        );
-      if (!room) return message.channel.send("Please Type The Channel Name");
-      if (!findroom) return message.channel.send("Cant Find This Channel");
-      let embed = new Discord.RichEmbed()
-        .setTitle("**Done The Welcome Has Been Setup**")
-        .addField("Channel:", `${room}`)
-        .addField("Requested By:", `${message.author}`)
-        .addField(
-          "Default Message:",
-          `**Welcome [member], You Joined by [inviter] invite**`
-        )
-        .setThumbnail(message.author.avatarURL)
-        .setFooter(`${client.user.username}`);
-      message.channel.sendEmbed(embed);
-      welcome[message.guild.id] = {
-        channel: room,
-        onoff: "On",
-        by: "On",
-        msg: `**Welcome [member], You Joined by [inviter] invite**`
-      };
-      fs.writeFile("./Database/welcomer.json", JSON.stringify(welcome), err => {
-        if (err) console.error(err);
-      });
-    } else if (welcome[message.guild.id].channel) {
-      let msg = await welcome[message.guild.id].msg;
-      let by = await welcome[message.guild.id].by;
-      if (!message.channel.guild)
-        return message.reply("**This Command Only For Servers**");
-      if (!message.member.hasPermission("MANAGE_GUILD"))
-        return message.channel.send(
-          "**Sorry But You Dont Have Permission** `MANAGE_GUILD`"
-        );
-      if (!room) return message.channel.send("Please Type The Channel Name");
-      if (!findroom) return message.channel.send("Cant Find This Channel");
-      let embed = new Discord.RichEmbed()
-        .setTitle("**Done The Welcome Has Been Setup**")
-        .addField("Channel:", `${room}`)
-        .addField("Requested By:", `${message.author}`)
-        .addField("Default Message:", msg)
-        .setThumbnail(message.author.avatarURL)
-        .setFooter(`${client.user.username}`);
-      message.channel.sendEmbed(embed);
-      welcome[message.guild.id] = {
-        channel: room,
-        onoff: "On",
-        by: by,
-        msg: msg
-      };
-      fs.writeFile("./Database/welcomer.json", JSON.stringify(welcome), err => {
-        if (err) console.error(err);
-      });
-    }
-  }
-});
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-
-client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[message.guild.id].prefix;
-  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
-
-if(Blacklist === 'on') return message.channel.send(``);
-  let messageArray = message.content.split(" ");
-  if (message.content.startsWith(prefix + "setMessage")) {
-    if (!welcome[message.guild.id] || !welcome[message.guild.id].onoff == "On")
-      return message.channel.send(
-        `**please type \`${prefix}setWelcomer\` first **`
-      );
-    let filter = m => m.author.id === message.author.id;
-    let thisMessage;
-    let thisFalse;
-    let room = welcome[message.guild.id].channel;
-    if (!message.member.hasPermission("MANAGE_GUILD"))
-      return message.channel.send("You don't have permission").then(msg => {
-        msg.delete(4500);
-        message.delete(4500);
-      });
-
-    message.channel
-      .send(
-        `**من فضلك اكتب رسالة الترحيب الان:
-لعمل منشن للعضو او الشخص الذى قام بدعوتة
-Ex : 
-\`[member] Joined the server by [inviter]\`**`
-      )
-      .then(msg => {
-        message.channel
-          .awaitMessages(filter, {
-            max: 1,
-            time: 90000,
-            errors: ["time"]
-          })
-          .then(collected => {
-            collected.first().delete();
-            thisMessage = collected.first().content;
-            msg.edit("**تم الاعداد بنجاح**").then(msg => {
-              let embed = new Discord.RichEmbed()
-                .setTitle("**Done The Welcome Msg Has Been Setup**")
-                .addField("Message:", `${thisMessage}`)
-                .setThumbnail(message.author.avatarURL)
-                .setFooter(`${client.user.username}`);
-              message.channel.sendEmbed(embed);
-              welcome[message.guild.id] = {
-                channel: room,
-                onoff: "On",
-                by: "On",
-                msg: thisMessage
-              };
-              fs.writeFile(
-                "./Database/welcomer.json",
-                JSON.stringify(welcome),
-                err => {
-                  if (err) console.error(err);
-                }
-              );
-            });
-          });
-      });
-  }
-});
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-
+//كود الرد التلقاءي
 const replyMSG = JSON.parse(fs.readFileSync("./Database/replyMSG.json", "utf8"));
 
 function saveReplay() {
@@ -1322,7 +1004,6 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.channel.send(" |** من فضلك اكتب الرساله الان...** ").then(msg => {
       message.channel
         .awaitMessages(filter, {
-          //R.I.P Royal Bot!
           maxMatches: 1,
           time: 12000,
           errors: ["time"]
@@ -1505,10 +1186,6 @@ const cd = require("countdown");
 const totime = require("to-time");
 const dbg = new Enmap({ name: "Giveaway" });
 
-//////////////////S
-
-/////////////////
-//gstart
 client.on("ready", async (message) => {
    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
 
@@ -1647,7 +1324,7 @@ if(Blacklist === 'on') return message.channel.send(``);
   if (message.author.bot || message.channel.type == "dm") return undefined;
   let args = message.content.split(" ");
   let timer;
-  if (args[0] == `${prefix}start`) {
+  if (args[0] == `${prefix}gstart`) {
     if (
       message.member.hasPermission("MANAGE_GUILD") ||
       message.member.roles.find(r => r.name == "GIVEAWAYS")
@@ -3463,6 +3140,8 @@ fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
 
 
 ///#)/+#)\¢\¢{}¢\¢\¢[¢{¢}]
+//$
+
 client.on("message", async message => {
    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
 

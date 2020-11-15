@@ -13,12 +13,12 @@ setInterval(() => {
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const developer = [`NIRO DEVELOPMENT`, `https://discord.gg/bMvtyJD`]
+const developer = [`NIRO DEVELOPMENT`, `https://discord.gg/bMvtyJD`];
 const moment = require("moment");
 const zalgo = require("zalgolize");
 const math = require("math-expression-evaluator");
 const figlet = require("figlet");
-const ytdl = require('ytdl-core');
+const ytdl = require("ytdl-core");
 const ms = require("ms");
 const { Client, RichEmbed } = require("discord.js");
 var { Util } = require("discord.js");
@@ -43,9 +43,9 @@ const queue = new Map();
 var table = require("table").table;
 //const points = JSON.parse(fs.readFileSync("./Database/points.json", "utf8"));
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`)
-})
-    //الكونفج
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+//الكونفج
 
 const devs = process.env.OWNER_ID;
 
@@ -53,13 +53,13 @@ const stat = process.env.BOT_STATUS;
 
 const prefix = process.env.PREFIX;
 
-const project_name = "niro-system"; 
+const project_name = "niro-system";
 
-const color = process.env.EMBED_COLOR; 
+const color = process.env.EMBED_COLOR;
 
-const youtube = new YouTube("AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA")
+const youtube = new YouTube("AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA");
 
-client.login(process.env.TOKEN); 
+client.login(process.env.TOKEN);
 
 //سيب حقوقي ارجوك
 
@@ -69,142 +69,168 @@ const yt_api_key = "AIzaSyCPqpVlcivHbXdo91K7v5WSSSy87tPdkKA";
 
 const Rules = process.env.SERVER_RULES;
 /////بلاك سلت
-const devs3 = [`${devs}`]
-client.on('message', async message => {
-if (message.author.bot) return undefined;
-let user = message.mentions.users.first();
-let reason = message.content.split(' ').slice(2).join(' ');
-let args = message.content.split(" ");
-if (args[0].toLowerCase() == prefix + 'blacklist') {
-if (!devs3.includes(message.author.id))
-return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
-message.channel.bulkDelete(1);
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.setAuthor(message.author.username, message.author.avatarURL)
-.setTitle("** __NEW Blacklist__ **")
-.setColor("BLACK")
-.addField("**- User :**", `[${user.tag}]`)
-.addField("**- Blacklisted By :**", `[${message.author.tag}]`)
-.addField("**- Reason :**", `[${reason}]`)
-.addField("**- Blacklisted In :**", `[${message.guild.name}]`)
-.addField("**- Time & Date :**", `[${message.createdAt}]`)
-.setFooter(`${client.user.username}`)
-.setFooter(message.guild.name, message.guild.iconURL);
-let channel = message.guild.channels;
-client.channels
-.get(`{black_room}`).sendEmbed(embed)
-.find("name", "blacklist-users");
-channel.send(embed);
- }
-});
-
-const db = require('quick.db');
-const devs2 = [`${devs}`]
-client.on('message', async message => {
-if (message.author.bot) return undefined;
-let user = message.mentions.users.first();
-let reason = message.content.split(' ').slice(2).join(' ');
-let args = message.content.split(" ");
-if (args[0].toLowerCase() == prefix + 'blacklist') {
-if (!devs2.includes(message.author.id))
-return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
-let user = message.mentions.users.first() || message.guild.members.cache.get(args[0]); 
-let Blacklist = await db.fetch(`Blacklist_${user.id}`); 
-if (Blacklist === null) Blacklist = 'off'; 
-if (!user) return message.channel.send(`**Usage: ${prefix}blacklist \`<Mention/ID>\`**`); 
-message.channel.send(`**Done Blacklisted The User**`); 
-db.set(`Blacklist_${user.id}`, "on");
-user.send(`⚠️${user}⚠️
-**You Are Blacklisted FROM \`${client.user.username}\` 
-Reason: \`${reason}\` **`)
-  } 
-}); 
-
-client.on('message', async message => {
-if (message.author.bot) return undefined;
-let user = message.mentions.users.first();
-let reason = message.content.split(' ').slice(2).join(' ');
-let args = message.content.split(" "); 
-  if (args[0].toLowerCase() == prefix + 'unblacklist') {
-if (!devs2.includes(message.author.id))
-return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
-let user = message.mentions.users.first() || message.guild.members.cache.get(args[0]); 
-let Blacklist = await db.fetch(`Blacklist_${user.id}`); 
-if (Blacklist === null) Blacklist = 'off'; 
-if (!user) return message.channel.send(`**Usage: ${prefix}unblacklist \`<Mention/ID>\`**`); 
-message.channel.send(`**Done Unblacklisted The User**`); 
-db.set(`Blacklist_${user.id}`, "off");
-user.send(`⚠️${user}⚠️
-**You Are UnBlacklisted FROM \`${client.user.username}\` 
-Reason: \`${reason}\` **`)
-  } 
-});
-
-client.on('message', async message => {
+const devs3 = [`${devs}`];
+client.on("message", async message => {
   if (message.author.bot) return undefined;
-  if (message.content === prefix + 'status') {
-let Blacklist = await db.fetch(`Blacklist_${message.author.id}`); 
-if (Blacklist === 'on') return message.channel.send(`**❌ | __Your Are Blacklisted Now__ **`); 
-message.channel.send(`** __You Aren't Blacklisted__ **`); 
-  } 
+  let user = message.mentions.users.first();
+  let reason = message.content
+    .split(" ")
+    .slice(2)
+    .join(" ");
+  let args = message.content.split(" ");
+  if (args[0].toLowerCase() == prefix + "blacklist") {
+    if (!devs3.includes(message.author.id))
+      return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
+    message.channel.bulkDelete(1);
+    let embed = new Discord.RichEmbed()
+      .setThumbnail(message.author.avatarURL)
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setTitle("** __NEW Blacklist__ **")
+      .setColor("BLACK")
+      .addField("**- User :**", `[${user.tag}]`)
+      .addField("**- Blacklisted By :**", `[${message.author.tag}]`)
+      .addField("**- Reason :**", `[${reason}]`)
+      .addField("**- Blacklisted In :**", `[${message.guild.name}]`)
+      .addField("**- Time & Date :**", `[${message.createdAt}]`)
+      .setFooter(`${client.user.username}`)
+      .setFooter(message.guild.name, message.guild.iconURL);
+    let channel = message.guild.channels;
+    client.channels
+      .get(`{black_room}`)
+      .sendEmbed(embed)
+      .find("name", "blacklist-users");
+    channel.send(embed);
+  }
+});
+
+const db = require("quick.db");
+const devs2 = [`${devs}`];
+client.on("message", async message => {
+  if (message.author.bot) return undefined;
+  let user = message.mentions.users.first();
+  let reason = message.content
+    .split(" ")
+    .slice(2)
+    .join(" ");
+  let args = message.content.split(" ");
+  if (args[0].toLowerCase() == prefix + "blacklist") {
+    if (!devs2.includes(message.author.id))
+      return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
+    let user =
+      message.mentions.users.first() ||
+      message.guild.members.cache.get(args[0]);
+    let Blacklist = await db.fetch(`Blacklist_${user.id}`);
+    if (Blacklist === null) Blacklist = "off";
+    if (!user)
+      return message.channel.send(
+        `**Usage: ${prefix}blacklist \`<Mention/ID>\`**`
+      );
+    message.channel.send(`**Done Blacklisted The User**`);
+    db.set(`Blacklist_${user.id}`, "on");
+    user.send(`⚠️${user}⚠️
+**You Are Blacklisted FROM \`${client.user.username}\` 
+Reason: \`${reason}\` **`);
+  }
+});
+
+client.on("message", async message => {
+  if (message.author.bot) return undefined;
+  let user = message.mentions.users.first();
+  let reason = message.content
+    .split(" ")
+    .slice(2)
+    .join(" ");
+  let args = message.content.split(" ");
+  if (args[0].toLowerCase() == prefix + "unblacklist") {
+    if (!devs2.includes(message.author.id))
+      return message.channel.send("** ❌ | __ليس لديك صلاحيات مطور البوت__ **");
+    let user =
+      message.mentions.users.first() ||
+      message.guild.members.cache.get(args[0]);
+    let Blacklist = await db.fetch(`Blacklist_${user.id}`);
+    if (Blacklist === null) Blacklist = "off";
+    if (!user)
+      return message.channel.send(
+        `**Usage: ${prefix}unblacklist \`<Mention/ID>\`**`
+      );
+    message.channel.send(`**Done Unblacklisted The User**`);
+    db.set(`Blacklist_${user.id}`, "off");
+    user.send(`⚠️${user}⚠️
+**You Are UnBlacklisted FROM \`${client.user.username}\` 
+Reason: \`${reason}\` **`);
+  }
+});
+
+client.on("message", async message => {
+  if (message.author.bot) return undefined;
+  if (message.content === prefix + "status") {
+    let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
+    if (Blacklist === "on")
+      return message.channel.send(`**❌ | __Your Are Blacklisted Now__ **`);
+    message.channel.send(`** __You Aren't Blacklisted__ **`);
+  }
 });
 //تغير برفكس
 const fs = require("fs"); // fs Package //
 let prefixes = JSON.parse(fs.readFileSync("./prefix.json", "utf8"));
 client.on("message", message => {
-    if (!message.channel.guild) return;
-    if (message.author.bot) return;
-    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: process.env.PREFIX,
+  if (!message.channel.guild) return;
+  if (message.author.bot) return;
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
-    var prefix = prefixes[message.guild.id].prefix;
-    var setp = prefixes[message.guild.id];
-    if (message.content.startsWith(prefix + 'setp')) {
-        if (!message.member.hasPermission(`MANAGE_GUILD`)) return message.reply(`**:x: Error: You do not have the required permissions: Manage Server.**`);
- 
-        let args = message.content.split(" ").slice(1);
- 
-        if (!args.join(" ")) return message.reply(`**:x: Error: Say The Prefix Please.**`);
-          const embed = new Discord.RichEmbed()
- 
-       .setColor("BLACK")
- .setTitle("Prefix Set!")
-  .setDescription(`**Set to ${args[0]}**`);
-   message.channel.send(embed);
-       setp.prefix = args.join();
- 
-    }
- 
-    fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });
+  var prefix = prefixes[message.guild.id].prefix;
+  var setp = prefixes[message.guild.id];
+  if (message.content.startsWith(prefix + "setp")) {
+    if (!message.member.hasPermission(`MANAGE_GUILD`))
+      return message.reply(
+        `**:x: Error: You do not have the required permissions: Manage Server.**`
+      );
+
+    let args = message.content.split(" ").slice(1);
+
+    if (!args.join(" "))
+      return message.reply(`**:x: Error: Say The Prefix Please.**`);
+    const embed = new Discord.RichEmbed()
+
+      .setColor("BLACK")
+      .setTitle("Prefix Set!")
+      .setDescription(`**Set to ${args[0]}**`);
+    message.channel.send(embed);
+    setp.prefix = args.join();
+  }
+
+  fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+    if (err) console.error(err);
+  });
 });
 
-client.on('message', message => { 
-     if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: process.env.PREFIX,
+client.on("message", message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
-    var prefix = prefixes[message.guild.id].prefix;
-    
-                                if(!message.channel.guild) return;
-                        if (message.content.startsWith(prefix + 'ping')) {
-                            if(!message.channel.guild) return;
-                            var msg = `${Date.now() - message.createdTimestamp}`
-                            var api = `${Math.round(client.ping)}`
-                            if (message.author.bot) return;
-                        let embed = new Discord.RichEmbed()
-                        .setAuthor(message.author.username,message.author.avatarURL)
-                        .setColor('RANDOM')
-                        .addField('**Time Taken:**',msg + " ms 📶 ")
-                        .addField('**WebSocket:**',api + " ms 📶 ")
-                        .setTimestamp()
-        message.channel.send({embed:embed});
-                        }
-                    });
-                    fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });
+  var prefix = prefixes[message.guild.id].prefix;
+
+  if (!message.channel.guild) return;
+  if (message.content.startsWith(prefix + "ping")) {
+    if (!message.channel.guild) return;
+    var msg = `${Date.now() - message.createdTimestamp}`;
+    var api = `${Math.round(client.ping)}`;
+    if (message.author.bot) return;
+    let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setColor("RANDOM")
+      .addField("**Time Taken:**", msg + " ms 📶 ")
+      .addField("**WebSocket:**", api + " ms 📶 ")
+      .setTimestamp();
+    message.channel.send({ embed: embed });
+  }
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 //حالة البوت لا تلعب فيها تقدر تعدل من env.
 client.on("ready", () => {
@@ -222,10 +248,11 @@ client.on("ready", () => {
 });
 //قوانين سيرفرك تقدر تعدلها من env.
 client.on("message", async luxy => {
-   if (!prefixes[luxy.guild.id]) prefixes[luxy.guild.id] = {
-        prefix: process.env.PREFIX,
+  if (!prefixes[luxy.guild.id])
+    prefixes[luxy.guild.id] = {
+      prefix: process.env.PREFIX
     };
-    var prefix = prefixes[luxy.guild.id].prefix;
+  var prefix = prefixes[luxy.guild.id].prefix;
   if (luxy.author.bot) return;
   if (luxy.content === prefix + "rules") {
     let embed = new Discord.RichEmbed()
@@ -236,22 +263,24 @@ client.on("message", async luxy => {
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ${Rules}
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-**`)
+**`
+      )
       .setFooter("NIRO Development");
     luxy.channel.send({ embed: embed });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 /////كود الهيلب او المساعده
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: process.env.PREFIX,
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "help")) {
     let pages = [
       `🎉**Giveaway Orders**🎉
@@ -368,9 +397,133 @@ if(Blacklist === 'on') return message.channel.send(``);
     });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
+
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
+    };
+  var prefix = prefixes[message.guild.id].prefix;
+  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
+  if (Blacklist === "on") return message.channel.send(``);
+  if (!message.guild || message.author.bot) return;
+  if (message.content == prefix + "colors") {
+    var fsn = require("fs-nextra");
+    fs.readdir("./BotData", async (err, files) => {
+      var f = files[Math.floor(Math.random() * files.length)];
+      var { Canvas } = require("canvas-constructor");
+      var x = 0;
+      var y = 0;
+      if (message.guild.roles.filter(role => !isNaN(role.name)).size <= 0)
+        return;
+      message.guild.roles
+        .filter(role => !isNaN(role.name))
+        .sort((b1, b2) => b1.name - b2.name)
+        .forEach(() => {
+          x += 100;
+          if (x > 100 * 12) {
+            x = 100;
+            y += 80;
+          }
+        });
+      var image = await fsn.readFile(`./BotData/${f}`);
+      var xd = new Canvas(100 * 11, y + 350)
+        .addBeveledImage(image, 0, 0, 100 * 11, y + 350, 100)
+        .setTextBaseline("middle")
+        .setColor("white")
+        .setTextSize(60)
+        .addText(`قائمة الألوان`, 375, 40);
+      x = 0;
+      y = 150;
+      message.guild.roles
+        .filter(role => !isNaN(role.name))
+        .sort((b1, b2) => b1.name - b2.name)
+        .forEach(role => {
+          x += 75;
+          if (x > 100 * 10) {
+            x = 75;
+            y += 80;
+          }
+          xd.setTextBaseline("middle")
+            .setTextAlign("center")
+            .setColor(role.hexColor)
+            .addBeveledRect(x, y, 60, 60, 15)
+            .setColor("white");
+          if (`${role.name}`.length > 2) {
+            xd.setTextSize(30);
+          } else if (`${role.name}`.length > 1) {
+            xd.setTextSize(40);
+          } else {
+            xd.setTextSize(50);
+          }
+          xd.addText(role.name, x + 30, y + 30);
+        });
+      message.channel.sendFile(xd.toBuffer());
     });
+  }
+});
+
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
+
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
+    };
+  var prefix = prefixes[message.guild.id].prefix;
+  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
+  if (Blacklist === "on") return message.channel.send(``);
+  let args = message.content.split(" ").slice(1);
+  if (message.content.split(" ")[0] == prefix + "color") {
+    const embedd = new Discord.RichEmbed()
+      .setFooter(
+        "Requested by " + message.author.username,
+        message.author.avatarURL
+      )
+      .setDescription(`**There's No Color With This Number ** :x: `)
+      .setColor(`ff0000`);
+    if (!args[0]) return message.channel.sendEmbed(embedd);
+    if (isNaN(args[0]))
+      return message.channel.sendEmbed(
+        embedd.setDescription("Please select a number :x:")
+      );
+    if (!message.guild.roles.find("name", `${args[0]}`))
+      return message.channel.sendEmbed(embedd);
+
+    var a = message.guild.roles.find("name", `${args[0]}`);
+    if (!a) return;
+    if (a.hasPermission(8))
+      return message.channel.send(
+        embedd.setDescription("This color has administrator!")
+      );
+    const embed = new Discord.RichEmbed()
+
+      .setFooter(
+        "Requested by " + message.author.username,
+        message.author.avatarURL
+      )
+      .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
+
+      .setColor(`${a.hexColor}`);
+    message.channel.sendEmbed(embed);
+    if (!args[0]) return;
+    setInterval(function() {});
+    let count = 0;
+    let ecount = 0;
+    for (let x = 1; x < 201; x++) {
+      message.member.removeRole(message.guild.roles.find("name", `${x}`));
+    }
+    message.member.addRole(message.guild.roles.find("name", `${args[0]}`));
+  }
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ////كود الميوزك
 let cmds = {
   play: { cmd: "play", a: ["p", "شغل"] },
@@ -414,10 +567,11 @@ client.on("ready", () => {
 });
 
 client.on("message", async msg => {
-   if (!prefixes[msg.uild.id]) prefixes[msg.uild.id] = {
-        prefix: process.env.PREFIX,
+  if (!prefixes[msg.uild.id])
+    prefixes[msg.uild.id] = {
+      prefix: process.env.PREFIX
     };
-    var prefix = prefixes[msg.guild.id].prefix;
+  var prefix = prefixes[msg.guild.id].prefix;
   if (msg.author.bot) return undefined;
   if (!msg.content.startsWith(prefix)) return undefined;
 
@@ -553,7 +707,7 @@ client.on("message", async msg => {
             .send(":watch: Loading... [`" + args + "`]")
             .then(m => {
               setTimeout(() => {
- //               :watch: Loading... [let]
+                //               :watch: Loading... [let]
                 m.edit(
                   `:notes: Added **${song.title}**` +
                     "(` " +
@@ -591,7 +745,8 @@ client.on("message", async msg => {
       const dispatcher = serverQueue.connection
         .playStream(ytdl(song.url))
         .on("end", reason => {
-          if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+          if (reason === "Stream is not generating quickly enough.")
+            console.log("Song ended.");
           else console.log(reason);
           if (serverQueue.repeating) return play(guild, serverQueue.songs[0]);
           serverQueue.songs.shift();
@@ -605,10 +760,10 @@ client.on("message", async msg => {
       return msg.channel.send(
         `You must be in ${msg.guild.me.voiceChannel.name}`
       );
-     if (!msg.member.hasPermission("ADMINISTRATOR")) {
-        msg.react("❌");
-        return msg.channel.send("You don't have permission `ADMINSTRATOR`");
-      }
+    if (!msg.member.hasPermission("ADMINISTRATOR")) {
+      msg.react("❌");
+      return msg.channel.send("You don't have permission `ADMINSTRATOR`");
+    }
     let queue = active.get(msg.guild.id);
     if (queue.repeating)
       return msg.channel.send(
@@ -644,7 +799,6 @@ client.on("message", async msg => {
     //if (req == 1) {
     msg.channel.send("**:notes: Skipped **" + args);
     return queue.connection.dispatcher.end("Skipping ..");
-     
   } else if (cmd === "pause") {
     let queue = active.get(msg.guild.id);
 
@@ -954,11 +1108,9 @@ client.on("message", async msg => {
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 const { Canvas } = require("canvas-constructor");
 const { Attachment } = require("discord.js");
 const { resolve, join } = require("path");
@@ -966,29 +1118,28 @@ const fetch = require("node-fetch");
 const prettySeconds = require("pretty-seconds");
 const fsn = require("fs-nextra");
 //كود الرد التلقاءي
-const replyMSG = JSON.parse(fs.readFileSync("./Database/replyMSG.json", "utf8"));
+const replyMSG = JSON.parse(
+  fs.readFileSync("./Database/replyMSG.json", "utf8")
+);
 
 function saveReplay() {
-
-  fs.writeFile("./Database/replyMSG.json", JSON.stringify(replyMSG), function(err) {
-
+  fs.writeFile("./Database/replyMSG.json", JSON.stringify(replyMSG), function(
+    err
+  ) {
     if (err) throw err;
-
   });
-
 }
 /////كود صنع رد تلقائي
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "reply")) {
     if (message.author.bot || message.channel.type == "dm") return undefined;
     if (!message.member.hasPermission("ADMINISTRATOR")) return;
@@ -1050,20 +1201,17 @@ if(Blacklist === 'on') return message.channel.send(``);
     });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (
     !replyMSG[message.author.id] ||
     !replyMSG[message.author.id].contentmessage ||
@@ -1077,23 +1225,20 @@ client.on("message", async message => {
     message.channel.send(`\`#\` ${reply}`);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "new")) {
     const reason = message.content
       .split(" ")
@@ -1175,28 +1320,25 @@ if(Blacklist === 'on') return message.channel.send(``);
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ////كود الفيف اوي
 const Enmap = require("enmap");
 const cd = require("countdown");
 const totime = require("to-time");
 const dbg = new Enmap({ name: "Giveaway" });
 
-client.on("ready", async (message) => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+client.on("ready", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   await dbg.defer;
   await console.log(`Logged in as [ ${client.user.username} ]!`);
   client.guilds.forEach(async g => {
@@ -1296,11 +1438,9 @@ if(Blacklist === 'on') return message.channel.send(``);
       });
   });
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 //client.on('error', console.error);
 //client.on('warn', warn => console.warn(`[WARN] - ${warn}`));
 process.on("unhandledRejection", (reason, promise) => {
@@ -1308,16 +1448,15 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   //let g = client.guilds
   //  .get("606910399811420175")
   //    .emojis.find(r => r.name === "start");
@@ -1538,23 +1677,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     } else return undefined;
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async msg => {
-   if (!prefixes[msg.guild.id]) prefixes[msg.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[msg.guild.id])
+    prefixes[msg.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[msg.guild.id].prefix;
+  var prefix = prefixes[msg.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${msg.author.id}`);
 
-if(Blacklist === 'on') return msg.channel.send(``);
+  if (Blacklist === "on") return msg.channel.send(``);
   let args = msg.content
     .split(" ")
     .slice(1)
@@ -1571,22 +1707,19 @@ if(Blacklist === 'on') return msg.channel.send(``);
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
-let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
+  var prefix = prefixes[message.guild.id].prefix;
+  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content === prefix + "info") {
     let oi = message.mentions.users.first()
       ? message.mentions.users.first().id
@@ -1639,15 +1772,13 @@ if(Blacklist === 'on') return message.channel.send(``);
     });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 const invites = {};
-client.on("ready", (message) => {
-  wait(1000);
+client.on("ready", message => {
+  // wait(1000);
   client.guilds.forEach(king => {
     king.fetchInvites().then(guildInvites => {
       invites[king.id] = guildInvites;
@@ -1655,17 +1786,16 @@ client.on("ready", (message) => {
   });
 });
 const m7 = JSON.parse(fs.readFileSync("./Database/m7.json", "utf8"));
-client.on("message", async  message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (!message.channel.guild) return;
   if (message.content.startsWith(prefix + "setinv")) {
     let args = message.content.split(" ").slice(1);
@@ -1719,23 +1849,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async Epic => {
-   if (!prefixes[Epic.guild.id]) prefixes[Epic.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[Epic.guild.id])
+    prefixes[Epic.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[Epic.guild.id].prefix;
+  var prefix = prefixes[Epic.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${Epic.author.id}`);
 
-if(Blacklist === 'on') return Epic.channel.send(``);
+  if (Blacklist === "on") return Epic.channel.send(``);
   if (Epic.content.startsWith(prefix + "vonline")) {
     if (!Epic.guild.member(Epic.author).hasPermissions("MANAGE_CHANNELS"))
       return Epic.reply(":x: **I Dont Have Permissions**");
@@ -1768,23 +1895,20 @@ if(Blacklist === 'on') return Epic.channel.send(``);
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ////////////
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "setmember")) {
     if (!message.guild.member(message.author).hasPermissions("MANAGE_CHANNELS"))
       return message.reply("❌ **لا تمتلك صلاحيه**");
@@ -1809,24 +1933,21 @@ if(Blacklist === 'on') return message.channel.send(``);
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 const shorten = require("isgd");
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "short")) {
     let args = message.content.split(" ").slice(1);
     if (!args[0]) return message.channel.send("**type `&short <link>` **");
@@ -1844,29 +1965,23 @@ if(Blacklist === 'on') return message.channel.send(``);
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async ninja => {
-  
-
-   if (!prefixes[ninja.guild.id]) prefixes[ninja.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[ninja.guild.id])
+    prefixes[ninja.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[ninja.guild.id].prefix;
+  var prefix = prefixes[ninja.guild.id].prefix;
 
   let Blacklist = await db.fetch(`Blacklist_${ninja.author.id}`);
 
-if(Blacklist === 'on') return ninja.channel.send(``);
+  if (Blacklist === "on") return ninja.channel.send(``);
   if (ninja.content === prefix + "close") {
-    if (!ninja.channel.guild)
-      if(!ninja.channel.guild) return;
+    if (!ninja.channel.guild) if (!ninja.channel.guild) return;
 
     if (!ninja.member.hasPermission("MANAGE_MESSAGES"))
       return ninja.reply("**ليس لديك صلاحيات**");
@@ -1879,8 +1994,7 @@ if(Blacklist === 'on') return ninja.channel.send(``);
       });
   }
   if (ninja.content === prefix + "open") {
-    if (!ninja.channel.guild)
-      if(!ninja.channel.guild) return;
+    if (!ninja.channel.guild) if (!ninja.channel.guild) return;
 
     if (!ninja.member.hasPermission("MANAGE_MESSAGES"))
       return ninja.reply("**ليس لديك صلاحيات**");
@@ -1893,11 +2007,9 @@ if(Blacklist === 'on') return ninja.channel.send(``);
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 /*
    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
 
@@ -1917,16 +2029,15 @@ fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
     });*/
 /////////////)///)/()))/////
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (!message.channel.guild) return;
   if (message.content.startsWith(prefix + "ping")) {
     if (!message.channel.guild) return;
@@ -1942,23 +2053,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.channel.send({ embed: embed });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ///////////////
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content === prefix + "hc") {
     if (!message.channel.guild) return;
     if (!message.member.hasPermission("ADMINISTRATOR"))
@@ -1969,24 +2077,21 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.channel.send("Channel Hided Successfully ! ✅  ");
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ////
 /////
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content === prefix + "sc") {
     if (!message.channel.guild) return;
     if (!message.member.hasPermission("ADMINISTRATOR"))
@@ -1997,12 +2102,9 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.channel.send("Channel Hided Successfully ! ✅  ");
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 /*client.on('message' , async message => {
      if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
@@ -2022,157 +2124,192 @@ fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
 
     });*/
 
-client.on('message', async message => {
-	     if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
-  if(message.content.split(' ')[0] == prefix +`kick`){
-  if(!message.guild || message.author.bot) return undefined;
-      if(!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | لا تمتلك صلاحية طرد الاعضاء!');
-      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | انا لا امتلك صلاحية طرد الاعضاء!');
-      let args = message.content.split(" ").slice(1);
-      let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
-      let reason = message.content.split(" ").slice(2).join(" ");
-      if(!user) return message.channel.send("نرجوا اتباع التنسيق الاتي: ogkick @Name والسبب");
-      if(!reason) reason = 'No reason provided.';
-      if(user.user.id === message.author.id) return message.channel.send(':no_entry: | لماذا تريد طرد نفسك؟');
-      if(user.user.id === message.guild.owner.id) return message.channel.send(':no_entry: | محاولة فاشلة جميلة :3');
-      if(message.guild.member(user.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنك طرد **${user.user.username}** لأن رتبته اعلي منك!`);
-      if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.user.username}** لأن رتبته اعلي من رتبتي!`);
-      if(!message.guild.member(user.user).kickable) return message.channel.send(`:no_entry: | لا يمكنني طرد **${user.user.username}** `);
-      if(message.guild.member(user.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`:no_entry: | لا يمكننك طرد **${user.user.username}** لأنه يمتلك رتبة عالية!`);
-      message.guild.member(user).kick(reason, user);
-      message.channel.send(`:white_check_mark: | تم بنجاح طرد ${user.user.username} من السيرفر! :airplane: ``${reason}```);
-    }
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.content.split(" ")[0] == prefix + `kick`) {
+    if (!message.guild || message.author.bot) return undefined;
+    if (!message.member.hasPermission("KICK_MEMBERS"))
+      return message.channel.send(":no_entry: | لا تمتلك صلاحية طرد الاعضاء!");
+    if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS"))
+      return message.channel.send(
+        ":no_entry: | انا لا امتلك صلاحية طرد الاعضاء!"
+      );
+    let args = message.content.split(" ").slice(1);
+    let user =
+      message.guild.members.get(message.content.split(" ")[1]) ||
+      message.mentions.members.first();
+    let reason = message.content
+      .split(" ")
+      .slice(2)
+      .join(" ");
+    if (!user)
+      return message.channel.send(
+        "نرجوا اتباع التنسيق الاتي: ogkick @Name والسبب"
+      );
+    if (!reason) reason = "No reason provided.";
+    if (user.user.id === message.author.id)
+      return message.channel.send(":no_entry: | لماذا تريد طرد نفسك؟");
+    if (user.user.id === message.guild.owner.id)
+      return message.channel.send(":no_entry: | محاولة فاشلة جميلة :3");
+    if (
+      message.guild.member(user.user).highestRole.position >=
+      message.guild.member(message.member).highestRole.position
+    )
+      return message.channel.send(
+        `:no_entry: | لا يمكنك طرد **${user.user.username}** لأن رتبته اعلي منك!`
+      );
+    if (
+      message.guild.member(user.user).highestRole.position >=
+      message.guild.member(client.user).highestRole.position
+    )
+      return message.channel.send(
+        `:no_entry: | لا يمكنني طرد **${user.user.username}** لأن رتبته اعلي من رتبتي!`
+      );
+    if (!message.guild.member(user.user).kickable)
+      return message.channel.send(
+        `:no_entry: | لا يمكنني طرد **${user.user.username}** `
+      );
+    if (message.guild.member(user.user).hasPermission("MANAGE_GUILD"))
+      return message.channel.send(
+        `:no_entry: | لا يمكننك طرد **${user.user.username}** لأنه يمتلك رتبة عالية!`
+      );
+    message.guild.member(user).kick(reason, user);
+    message.channel.send(
+      `:white_check_mark: | تم بنجاح طرد ${user.user.username} من السيرفر! :airplane: ``${reason}```
+    );
+  }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
-        if (err) console.error(err);
-
-    });
-    
-let warns = JSON.parse(fs.readFileSync("./Database/warnings.json"));;
+let warns = JSON.parse(fs.readFileSync("./Database/warnings.json"));
 /*const client = new Discord.Client();*/
- 
- 
-client.on('message', async message => {
-      if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
-    };
-
-    var prefix = prefixes[message.guild.id].prefix;
-  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
-
-if(Blacklist === 'on') return message.channel.send(``);
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
- 
- 
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
- 
-  let args = message.content.split(" ").slice(1);
- 
-  if (command == "warn") { //??? ???????
- 
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
- 
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
- 
-  if (message.mentions.users.size < 1) return message.reply("**???? ???**");
-  if(!reason) return message.reply ("**???? ??? ?????**");
- 
- 
-  if(!warns[user.id]) warns[user.id] = {
-    warns: 0
-  };
- 
-  warns[user.id].warns++;
- 
-  fs.writeFile("./Database/warnings.json", JSON.stringify(warns), (err) => {
-    if (err) console.log(err)
-  });
- 
- 
-  const banembed = new Discord.RichEmbed()
-  .setAuthor(`WARNED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-   client.channels.find('name', 'log').send({
-    embed : banembed
-  })
- 
-    if(warns[user.id].warns == 2){ //??? ???????? ??????
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole){
-      try{
-        muterole = await message.guild.createRole({
-          name: "Muted",
-          color: "#000000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        });
-      }catch(e){
-        console.log(e.stack);
-      }
-    }
- 
-    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("**??? ???? ?????? ?????**:x: ") .then(m => m.delete(5000));
- 
-    let mutetime = "60s";
-    await(tomute.addRole(muterole.id));
-    message.channel.send(`<@${user.id}> has been temporarily muted`);
- 
-    setTimeout(async function(){
-    await(tomute.removeRole(muterole.id));
-      message.reply(`<@${user.id}> has been unmuted.`)
-    }, ms(mutetime))
-  }
-  if(warns[user.id].warns == 3){  //??? ???????? ??????
-    message.guild.member(user).ban(reason);
-    message.reply(`<@${user.id}> has been banned.`)
-  }
- 
-}
-}
-);
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "warn") {
+    //??? ???????
+
+    if (!message.channel.guild)
+      return message.reply("** This command only for servers**");
+
+    if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS"))
+      return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+    let user = message.mentions.users.first();
+    let reason = message.content
+      .split(" ")
+      .slice(2)
+      .join(" ");
+
+    if (message.mentions.users.size < 1) return message.reply("**???? ???**");
+    if (!reason) return message.reply("**???? ??? ?????**");
+
+    if (!warns[user.id])
+      warns[user.id] = {
+        warns: 0
+      };
+
+    warns[user.id].warns++;
+
+    fs.writeFile("./Database/warnings.json", JSON.stringify(warns), err => {
+      if (err) console.log(err);
+    });
+
+    const banembed = new Discord.RichEmbed()
+      .setAuthor(`WARNED!`, user.displayAvatarURL)
+      .setColor("RANDOM")
+      .setTimestamp()
+      .addField("**User:**", "**[ " + `${user.tag}` + " ]**")
+      .addField("**By:**", "**[ " + `${message.author.tag}` + " ]**")
+      .addField("**Reason:**", "**[ " + `${reason}` + " ]**");
+    client.channels.find("name", "log").send({
+      embed: banembed
+    });
+
+    if (warns[user.id].warns == 2) {
+      //??? ???????? ??????
+      let muterole = message.guild.roles.find(`name`, "Muted");
+      if (!muterole) {
+        try {
+          muterole = await message.guild.createRole({
+            name: "Muted",
+            color: "#000000",
+            permissions: []
+          });
+          message.guild.channels.forEach(async (channel, id) => {
+            await channel.overwritePermissions(muterole, {
+              SEND_MESSAGES: false,
+              ADD_REACTIONS: false
+            });
+          });
+        } catch (e) {
+          console.log(e.stack);
+        }
+      }
+
+      let tomute = message.guild.member(
+        message.mentions.users.first() || message.guild.members.get(args[0])
+      );
+      if (!tomute)
+        return message
+          .reply("**??? ???? ?????? ?????**:x: ")
+          .then(m => m.delete(5000));
+
+      let mutetime = "60s";
+      await tomute.addRole(muterole.id);
+      message.channel.send(`<@${user.id}> has been temporarily muted`);
+
+      setTimeout(async function() {
+        await tomute.removeRole(muterole.id);
+        message.reply(`<@${user.id}> has been unmuted.`);
+      }, ms(mutetime));
+    }
+    if (warns[user.id].warns == 3) {
+      //??? ???????? ??????
+      message.guild.member(user).ban(reason);
+      message.reply(`<@${user.id}> has been banned.`);
+    }
+  }
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
+
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
+    };
+
+  var prefix = prefixes[message.guild.id].prefix;
+  let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
+
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -2204,23 +2341,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     );
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -2243,23 +2377,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.delete();
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async msg => {
-   if (!prefixes[msg.guild.id]) prefixes[msg.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[msg.guild.id])
+    prefixes[msg.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[msg.guild.id].prefix;
+  var prefix = prefixes[msg.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${msg.author.id}`);
 
-if(Blacklist === 'on') return msg.channel.send(``);
+  if (Blacklist === "on") return msg.channel.send(``);
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -2286,23 +2417,20 @@ if(Blacklist === 'on') return msg.channel.send(``);
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.boss) return;
 
   if (!message.content.startsWith(prefix)) return;
@@ -2394,23 +2522,20 @@ ${message.author.tag} تمت معاقبتك بواسطة
     return;
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   let roleembed = new Discord.RichEmbed()
     .setDescription(
       `
@@ -2524,70 +2649,61 @@ if(Blacklist === 'on') return message.channel.send(``);
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "ctext")) {
     var args = message.content.split(" ").slice(1);
     var argrst = args.join(" ");
     message.guild.createChannel(`${argrst}`, "text");
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "cvoice")) {
     var args = message.content.split(" ").slice(1);
     var argrst = args.join(" ");
     message.guild.createChannel(`${argrst}`, "voice");
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 /////
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "rename")) {
     if (!message.channel.guild) return;
     if (!message.member.hasPermission("MANAGE_CHANNEL")) return;
@@ -2604,24 +2720,21 @@ if(Blacklist === 'on') return message.channel.send(``);
       .catch(console.error);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 let ar = JSON.parse(fs.readFileSync(`AutoRole.json`, `utf8`));
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   var sender = message.author;
 
   if (!message.guild) return;
@@ -2694,23 +2807,20 @@ Role : __${ar[message.guild.id].role}__`
     if (err) console.error(err);
   });
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "emoji")) {
     if (message.author.bot) return;
     var emojiid = message.content
@@ -2727,23 +2837,20 @@ ${prefix}emoji <EmojiID>`);
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.content.startsWith(prefix + "avatar")) {
     if (!message.channel.guild) return;
     var mentionned = message.mentions.users.first();
@@ -2760,27 +2867,24 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.channel.sendEmbed(embed);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 //top
 var top = require("./Database/top.json");
 function save() {
   fs.writeFileSync("./Database/top.json", JSON.stringify(top, null, 4));
 }
 client.on("voiceStateUpdate", async function(oldMember, newMember, message) {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (newMember.user.bot) return;
   if (!top[newMember.guild.id]) top[newMember.guild.id] = {};
   if (!top[newMember.guild.id][newMember.user.id])
@@ -2803,23 +2907,20 @@ if(Blacklist === 'on') return message.channel.send(``);
     }, 60000);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async function(message) {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.bot) return;
   if (!message.guild) return;
   if (!top[message.guild.id]) top[message.guild.id] = {};
@@ -2945,117 +3046,126 @@ if(Blacklist === 'on') return message.channel.send(``);
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ///////)()?;-7///
 
-const temp = JSON.parse(fs.readFileSync('./Database/temp.json', 'utf8'));
-client.on('message', async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+const temp = JSON.parse(fs.readFileSync("./Database/temp.json", "utf8"));
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
- if(message.channel.type === "dm") return;
-  if(message.author.bot) return;
-   if(!temp[message.guild.id]) temp[message.guild.id] = {
-    time: "3000",
-     category : 'click here',
-      channel : 'click here'
-       }
-        if(message.content.startsWith( prefix +'temp on')){
-         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
-           var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
-            ch.setParent(cg)
-             message.channel.send('**Done ,**')
-              client.on('message' , message => {
-               if(message.content === prefix +'temp off') {
-                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-                 cg.delete()
-                  ch.delete()
-                   message.channel.send('**Done ,**')
-                    }
-                     });
-                      const time = temp[message.guild.id].time
-                       client.on('message' , message => {
-                        if (message.content.startsWith(prefix + "temptime")) {
-                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-                          let newTime= message.content.split(' ').slice(1).join(" ")
-                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
-	                 if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
-	                if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
-                       temp[message.guild.id].time = newTime
-                      message.channel.send(`**Temp Rooms Time Change To \`${newTime}\`**`);
-                     }
-                    });
-                   client.on('voiceStateUpdate', (old, neww) => {
-                  let newUserChannel = neww.voiceChannel
-                 let oldUserChannel = old.voiceChannel
-                temp[message.guild.id].category = cg.id
-               temp[message.guild.id].channel = ch.id
-              let channel = temp[message.guild.id].channel
-             let category = temp[message.guild.id].category
-            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
-           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
-          c.setParent(category)
-         let scan = setTimeout(()=>{
-        if(!neww.voiceChannel) {
-       c.delete();
-      client.channels.get(channel).overwritePermissions(neww, {
-     CONNECT:true,
-    SPEAK:true
-   })
-  }
- }, temp[neww.guild.id].time);
-  c.overwritePermissions(neww, {
-   CONNECT:true,
-    SPEAK:true,
-     MANAGE_CHANNEL:true,
-      MUTE_MEMBERS:true,
-       DEAFEN_MEMBERS:true,
-	MOVE_MEMBERS:true,
-	 VIEW_CHANNEL:true
-	  })
-	   neww.setVoiceChannel(c)
-            })
-             client.channels.get(channel).overwritePermissions(neww, {
-	      CONNECT:false,
-	       SPEAK:false
-		})
-               }
-              })
-             })
-           })
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.channel.type === "dm") return;
+  if (message.author.bot) return;
+  if (!temp[message.guild.id])
+    temp[message.guild.id] = {
+      time: "3000",
+      category: "click here",
+      channel: "click here"
+    };
+  if (message.content.startsWith(prefix + "temp on")) {
+    if (!message.member.hasPermission(`MANAGE_GUILD`)) return;
+    var ggg = message.guild.createChannel("click here", "category").then(cg => {
+      var ccc = message.guild.createChannel("click here", "voice").then(ch => {
+        ch.setParent(cg);
+        message.channel.send("**Done ,**");
+        client.on("message", message => {
+          if (message.content === prefix + "temp off") {
+            if (!message.member.hasPermission(`MANAGE_GUILD`)) return;
+            cg.delete();
+            ch.delete();
+            message.channel.send("**Done ,**");
           }
-         fs.writeFile("./Database/temp.json", JSON.stringify(temp), (err) => {
-        if(err) console.error(err)
-       })
+        });
+        const time = temp[message.guild.id].time;
+        client.on("message", message => {
+          if (message.content.startsWith(prefix + "temptime")) {
+            if (!message.member.hasPermission(`MANAGE_GUILD`)) return;
+            let newTime = message.content
+              .split(" ")
+              .slice(1)
+              .join(" ");
+            if (!newTime)
+              return message.reply(
+                `**${prefix}temptime <time>  \`1000 = 1s\`**`
+              );
+            if (isNaN(newTime))
+              return message.reply(`** The Time Be Nambers :face_palm: **`);
+            if (newTime < 1)
+              return message.reply(`**The Time Be Up \`3000s\`**`);
+            temp[message.guild.id].time = newTime;
+            message.channel.send(
+              `**Temp Rooms Time Change To \`${newTime}\`**`
+            );
+          }
+        });
+        client.on("voiceStateUpdate", (old, neww) => {
+          let newUserChannel = neww.voiceChannel;
+          let oldUserChannel = old.voiceChannel;
+          temp[message.guild.id].category = cg.id;
+          temp[message.guild.id].channel = ch.id;
+          let channel = temp[message.guild.id].channel;
+          let category = temp[message.guild.id].category;
+          if (
+            oldUserChannel === undefined &&
+            newUserChannel !== undefined &&
+            newUserChannel.id == channel
+          ) {
+            neww.guild.createChannel(neww.displayName, "voice").then(c => {
+              c.setParent(category);
+              let scan = setTimeout(() => {
+                if (!neww.voiceChannel) {
+                  c.delete();
+                  client.channels.get(channel).overwritePermissions(neww, {
+                    CONNECT: true,
+                    SPEAK: true
+                  });
+                }
+              }, temp[neww.guild.id].time);
+              c.overwritePermissions(neww, {
+                CONNECT: true,
+                SPEAK: true,
+                MANAGE_CHANNEL: true,
+                MUTE_MEMBERS: true,
+                DEAFEN_MEMBERS: true,
+                MOVE_MEMBERS: true,
+                VIEW_CHANNEL: true
+              });
+              neww.setVoiceChannel(c);
+            });
+            client.channels.get(channel).overwritePermissions(neww, {
+              CONNECT: false,
+              SPEAK: false
+            });
+          }
+        });
       });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
     });
+  }
+  fs.writeFile("./Database/temp.json", JSON.stringify(temp), err => {
+    if (err) console.error(err);
+  });
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 let xp = require("./Database/xp.json"); //سوي ملف بأسم xp.json
 
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.author.bot) return;
   if (message.channel.type == "dm") return;
 
@@ -3087,20 +3197,17 @@ client.on("message", message => {
     if (err) console.log(err);
   });
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.author.bot) return;
   if (message.channel.type == "dm") return;
 
@@ -3132,27 +3239,23 @@ client.on("message", message => {
     message.channel.send(embed);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
-
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 ///#)/+#)\¢\¢{}¢\¢\¢[¢{¢}]
 //$
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   let Fire = message.content.split(" ")[0].substring(prefix.length);
   let mention = message.mentions.users.first() || message.author;
   if (Fire === "acredits") {
@@ -3175,26 +3278,23 @@ if(Blacklist === 'on') return message.channel.send(``);
     message.reply(`**, Remove Money For : \`${args[1]}\`**`);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ////////////////////////////////////////////////
 
 const credits = JSON.parse(fs.readFileSync("./Database/credits.json"));
 var time = require("./Database/time.json");
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.bot || message.channel.type === "dm") return;
   let args = message.content.split(" ");
   let author = message.author.id;
@@ -3328,23 +3428,20 @@ type these numbers to confirm: `
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async msg => {
-   if (!prefixes[msg.guild.id]) prefixes[msg.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[msg.guild.id])
+    prefixes[msg.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[msg.guild.id].prefix;
+  var prefix = prefixes[msg.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${msg.author.id}`);
 
-if(Blacklist === 'on') return msg.channel.send(``);
+  if (Blacklist === "on") return msg.channel.send(``);
   if (msg.content === prefix + "server") {
     var w1 = msg.guild.createdAt.getFullYear();
     var w2 = msg.guild.createdAt.getMonth();
@@ -3368,23 +3465,20 @@ if(Blacklist === 'on') return msg.channel.send(``);
     msg.channel.sendEmbed(embed);
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", async message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
+  if (Blacklist === "on") return message.channel.send(``);
   if (message.author.bot) return;
   if (message.content === prefix + "email") {
     function randomem() {
@@ -3421,20 +3515,17 @@ Password : **${random2}**
     message.channel.send("**account has ben sended in your dm | ☑ **");
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 client.on("message", function(message) {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.content.startsWith(prefix + "rps")) {
     let messageArgs = message.content
       .split(" ")
@@ -3490,21 +3581,18 @@ client.on("message", function(message) {
 });
 {
 }
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 //////////
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.content == prefix + "hq") {
     message.react("🤔", "👌");
     var x = [
@@ -3601,20 +3689,17 @@ client.on("message", message => {
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 //////////
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.content == prefix + "capitals") {
     var x = [
       "ما عاصمة **المغرب**",
@@ -3681,20 +3766,17 @@ You have 20 seconds to answer the question`
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 ///////////
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (!message.content.startsWith(prefix)) return;
   if (!message.channel.guild)
     return message.reply("** This command only for servers **");
@@ -3738,21 +3820,18 @@ client.on("message", message => {
       .then(msg => msg.delete(7000));
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 ///////////
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.author.bot) return;
 
   if (message.content.startsWith(prefix + "xo")) {
@@ -3833,21 +3912,18 @@ client.on("message", message => {
     }
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-
-        if (err) console.error(err);
-
-    });
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
 ///////////
 client.on("message", message => {
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   if (message.content.startsWith(prefix + "hack")) {
     if (!message.author.id === "") return;
     if (message.author.bot) return;
@@ -4127,201 +4203,221 @@ client.on("message", message => {
       });
   }
 });
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
-        if (err) console.error(err);
-
-    });
-
-client.on('message', async message => {
-  
-
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
 
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
-    if (message.content == prefix + "math") {
-        var x = ["212+212=?",
-"321+43=?",
-"4534+23",
-"23+3434=?",
-"2311+32=?",
-"765+343=?",
-"343+1121=?",
-"43234+1=?",
-"10000000000+2=?",
-"232+21=?",
-"12+23=?",        
-"9x9=?",
-"8x9=?",
-"4x4=?",
-"2x22=?",
-"12x2=?",
-"7x7=?",
-"5x5=?",
-"9x3=?",
-"2342432x0=?",
-"21321x1=?",
-"3x4x5=?",
-];
-        var x2 = ['424',
-        "364",
-        "4557",
-        "3457",
-		"2343",
-		"1108",
-    "1464",
-    "43235",
-   "10000000002",
-  "253",
-  "35",
-'81',
-        "72",
-        "16",
-        "42",
-		"22",
-		"49",
-		"25",
-		"27",
-    "0",
-    "21321",
-    "60",
-        
-        ];
-        
-        var x3 = Math.floor(Math.random()*x.length)
-        message.channel.send(`  اول شخص يحل المسأله :  __**${x[x3]}**__
-لديك 15 ثانية لحل ضرب`).then(msg1=> {
-            var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
-                maxMatches : 1,
-                time : 15000,
-                errors : ['time']
-            })
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.content == prefix + "math") {
+    var x = [
+      "212+212=?",
+      "321+43=?",
+      "4534+23",
+      "23+3434=?",
+      "2311+32=?",
+      "765+343=?",
+      "343+1121=?",
+      "43234+1=?",
+      "10000000000+2=?",
+      "232+21=?",
+      "12+23=?",
+      "9x9=?",
+      "8x9=?",
+      "4x4=?",
+      "2x22=?",
+      "12x2=?",
+      "7x7=?",
+      "5x5=?",
+      "9x3=?",
+      "2342432x0=?",
+      "21321x1=?",
+      "3x4x5=?"
+    ];
+    var x2 = [
+      "424",
+      "364",
+      "4557",
+      "3457",
+      "2343",
+      "1108",
+      "1464",
+      "43235",
+      "10000000002",
+      "253",
+      "35",
+      "81",
+      "72",
+      "16",
+      "42",
+      "22",
+      "49",
+      "25",
+      "27",
+      "0",
+      "21321",
+      "60"
+    ];
+
+    var x3 = Math.floor(Math.random() * x.length);
+    message.channel
+      .send(
+        `  اول شخص يحل المسأله :  __**${x[x3]}**__
+لديك 15 ثانية لحل ضرب`
+      )
+      .then(msg1 => {
+        var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
+          maxMatches: 1,
+          time: 15000,
+          errors: ["time"]
+        });
         r.catch(() => {
-            return message.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
-            الإجآبة الصحيحةة هي __**${x2[x3]}**__`)
-        })
-        
-        r.then((collected)=> {
-            message.channel.send(`${collected.first().author}لقد قمت بكتابة حل  في الوقت المناسب  `);
-        })
-        })
-    }
-})
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
+          return message.channel
+            .send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
+            الإجآبة الصحيحةة هي __**${x2[x3]}**__`);
+        });
 
-        if (err) console.error(err);
-
-    });
-client.on('message', async message => {
-  
-   if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+        r.then(collected => {
+          message.channel.send(
+            `${collected.first().author}لقد قمت بكتابة حل  في الوقت المناسب  `
+          );
+        });
+      });
+  }
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
 
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
-    if (message.content == prefix + "fkk")
-      {
-        var x = ["محمد",
-"مدرسة",
-"بيت",
-"الله",
-"بيت مقدس",
-"مهندس",
-"ريضيات",
-"بسم الله رحمن رحيم",
-"طماطم",
-"سيرفر",
-];
-        var x2 = ['م ح م د',
-        "م د ر س ة",
-        "ب ي ت ",
-        "ا ل ل ه",
-"ب ي ت م ق د س",
-"م ه ن د س",
-"ر ي ض ي ا ت",
-"ب س م ا ل ل ه ر ح م ن ر ح ي م",
-"ط م ا ط م",
-"س ي ر ف ر",
-     ];
-        
-        var x3 = Math.floor(Math.random()*x.length)
-        message.channel.send(`  فكك
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.content == prefix + "fkk") {
+    var x = [
+      "محمد",
+      "مدرسة",
+      "بيت",
+      "الله",
+      "بيت مقدس",
+      "مهندس",
+      "ريضيات",
+      "بسم الله رحمن رحيم",
+      "طماطم",
+      "سيرفر"
+    ];
+    var x2 = [
+      "م ح م د",
+      "م د ر س ة",
+      "ب ي ت ",
+      "ا ل ل ه",
+      "ب ي ت م ق د س",
+      "م ه ن د س",
+      "ر ي ض ي ا ت",
+      "ب س م ا ل ل ه ر ح م ن ر ح ي م",
+      "ط م ا ط م",
+      "س ي ر ف ر"
+    ];
+
+    var x3 = Math.floor(Math.random() * x.length);
+    message.channel
+      .send(
+        `  فكك
  :  __**${x[x3]}**__
-لديك 20 ثانية`).then(msg1=> {
-            var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
-                maxMatches : 1,
-                time : 20000,
-                errors : ['time']
-            })
+لديك 20 ثانية`
+      )
+      .then(msg1 => {
+        var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
+          maxMatches: 1,
+          time: 20000,
+          errors: ["time"]
+        });
         r.catch(() => {
-            return message.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
-            الإجآبة الصحيحةة هي __**${x2[x3]}**__`)
-        })
-        
-        r.then((collected)=> {
-            message.channel.send(`${collected.first().author}لقد قمت بتفكيك كلمة في وقت مناسب`);
-        })
-        })
-    }
-})
+          return message.channel
+            .send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
+            الإجآبة الصحيحةة هي __**${x2[x3]}**__`);
+        });
 
-fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
+        r.then(collected => {
+          message.channel.send(
+            `${collected.first().author}لقد قمت بتفكيك كلمة في وقت مناسب`
+          );
+        });
+      });
+  }
+});
 
-        if (err) console.error(err);
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});
 
-    });
-    
-    client.on('message', async message => {
-    	     if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-
-        prefix: process.env.PREFIX,
-
+client.on("message", async message => {
+  if (!prefixes[message.guild.id])
+    prefixes[message.guild.id] = {
+      prefix: process.env.PREFIX
     };
 
-    var prefix = prefixes[message.guild.id].prefix;
+  var prefix = prefixes[message.guild.id].prefix;
   let Blacklist = await db.fetch(`Blacklist_${message.author.id}`);
 
-if(Blacklist === 'on') return message.channel.send(``);
-                      if (message.content.startsWith(prefix + "fast")) {
-                        if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
-                      
-                      const type = require('./2sr3.json');
-                      const item = type[Math.floor(Math.random() * type.length)];
-                      const filter = response => {
-                          return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-                      };
-                      message.channel.send('** لديك 15 ثانيه لكتابه هذه الكلمه بسرعة**').then(msg => {
-                      
-                            
-                      msg.channel.send(`${item.type}`).then(() => {
-                              message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
-                              .then((collected) => {
-                          message.channel.send(`${collected.first().author} ✅ **احسنت لقد تمكنت من كتابه هذه الكلمه بسرعه**`);
-                          console.log(`[Typing] ${collected.first().author} typed the word.`);
-                                })
-                                .catch(collected => {
-                                  message.channel.send(`:x: **لم يتمكن احد من كتابه هذه الكلمه في الوقت المناسب**`);
-                                })
-                          })
-                        })
-                      }
-                      });
-                      fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
+  if (Blacklist === "on") return message.channel.send(``);
+  if (message.content.startsWith(prefix + "fast")) {
+    if (!message.channel.guild)
+      return message
+        .reply("**هذا الأمر للسيرفرات فقط**")
+        .then(m => m.delete(3000));
 
-        if (err) console.error(err);
-
-    });
+    const type = require("./2sr3.json");
+    const item = type[Math.floor(Math.random() * type.length)];
+    const filter = response => {
+      return item.answers.some(
+        answer => answer.toLowerCase() === response.content.toLowerCase()
+      );
+    };
+    message.channel
+      .send("** لديك 15 ثانيه لكتابه هذه الكلمه بسرعة**")
+      .then(msg => {
+        msg.channel.send(`${item.type}`).then(() => {
+          message.channel
+            .awaitMessages(filter, {
+              maxMatches: 1,
+              time: 15000,
+              errors: ["time"]
+            })
+            .then(collected => {
+              message.channel.send(
+                `${
+                  collected.first().author
+                } ✅ **احسنت لقد تمكنت من كتابه هذه الكلمه بسرعه**`
+              );
+              console.log(
+                `[Typing] ${collected.first().author} typed the word.`
+              );
+            })
+            .catch(collected => {
+              message.channel.send(
+                `:x: **لم يتمكن احد من كتابه هذه الكلمه في الوقت المناسب**`
+              );
+            });
+        });
+      });
+  }
+});
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
+});

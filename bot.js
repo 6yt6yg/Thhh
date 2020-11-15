@@ -304,6 +304,7 @@ client.on("message", async message => {
 > **👑| ${prefix}unmute --> لفك الميوت من اي شخص**
 > **👑| ${prefix}role --> لأعضاء اي شخص رتبه معينه**
 > **👑| ${prefix}reply --> لصنع رد تلقائي**
+> **👑| ${prefix}setLog --> لتحديد روم الوج**
 > **👑| ${prefix}ctext --> لصنع روم كتابي**
 > **👑| ${prefix}cvoive --> لصنع روم صوتي**
 > **👑| ${prefix}rename --> لتغير اسم الروم الكتابي**
@@ -406,7 +407,6 @@ fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
 const log = JSON.parse(fs.readFileSync("./log.json", "utf8"));
 
 client.on("message", async message => {
-  
   if (!prefixes[message.guild.id])
     prefixes[message.guild.id] = {
       prefix: process.env.PREFIX
@@ -442,6 +442,10 @@ client.on("message", async message => {
       if (err) console.error(err);
     });
   }
+});
+
+fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), err => {
+  if (err) console.error(err);
 });
 
 client.on("message", message => {
